@@ -1,133 +1,183 @@
-# Werkstatt Infinite
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/logo.svg">
+    <img alt="Werkstatt Infinite" src="docs/logo.svg" width="180">
+  </picture>
+</p>
 
-Werkstatt Infinite is a premium Android drawing and notebook app built with Kotlin, Jetpack Compose, StateFlow, Hilt, and Room. It focuses on a clean, low-distraction canvas for sketching, notes, and visual journaling, with fast local persistence and a dark NODAYSIDLE-inspired interface.
+<p align="center">
+  <strong>W E R K S T A T T &ensp; I N F I N I T E</strong>
+</p>
 
-The app currently uses a fixed high-resolution drawing page with pinch-to-zoom and two-finger pan. It is not an unbounded infinite canvas yet, but it is designed to feel spacious and smooth on phones without cluttering the drawing surface.
+<p align="center">
+  Premium Android drawing and notebook app. Local-first. Jetpack Compose. Dark void.
+</p>
+
+<p align="center">
+  <a href="#download">Download</a> ·
+  <a href="#features">Features</a> ·
+  <a href="#architecture">Architecture</a> ·
+  <a href="#build">Build</a>
+</p>
+
+---
+
+## What is Werkstatt Infinite?
+
+Werkstatt Infinite is a premium Android drawing and bullet-journaling app built with Kotlin, Jetpack Compose, and Room. It focuses on a clean, low-distraction canvas for sketching, notes, and visual journaling — with fast local persistence, a dark void aesthetic, and NODAYSIDLE's Volt accent.
+
+No accounts. No cloud. No clutter. Just you and the canvas.
 
 ## Features
 
-- Smooth touch drawing with pressure-aware stroke capture
-- Pinch-to-zoom and two-finger pan on the canvas
-- Clean canvas UI with no left-side tool rail or zoom overlay
-- Brush presets for Pen, Fine, Ball, Pencil, Marker, Water, Ink, and Brush
-- Brush size, color, eraser, undo, redo, and grid controls
-- Local gallery with generated thumbnails
-- Auto-save for canvas entries
-- Export and share drawings through Android share sheets
-- Premium dark theme with Volt accent color
+- **8 brush types** — Pen, Fine, Ballpoint, Pencil, Marker, Watercolor, Ink, Brush — each with distinct rendering (native fast path + Compose path)
+- **Pressure-aware strokes** — captures Android pointer pressure for natural line weight
+- **Pinch-to-zoom and two-finger pan** — fluid viewport transform (0.5×–5× zoom)
+- **Grid system** — toggle lines, dots, or off with smart step multiplier at any zoom level
+- **Undo / redo** — full stroke-level history
+- **Eraser** — spatial-index-backed, fast even with 10,000+ strokes
+- **Color wheel + 6 preset palettes** — Bold, Pastel, Earth, Neon, Skin, Vintage
+- **Gallery with thumbnails** — auto-generated, sort by date or name, rename, delete
+- **Auto-save** — 1.8-second debounce, throttled thumbnail refresh
+- **Export** — share drawings through Android share sheets
+- **Paper templates** — Blank, Ruled, Dot Grid, Small Grid, Storyboard, Sketch
 
-## Current Scope
+## Download
 
-Werkstatt Infinite is a local-first drawing app. Canvas entries are stored on-device using Room, and generated thumbnails are stored locally for gallery browsing.
+Download the latest APK from GitHub Releases:
 
-Image import is intentionally not part of the active app flow at the moment. The current experience is focused on fast, hassle-free drawing.
+[Download latest release](https://github.com/nodaysidle/werkstatt-infinite/releases/latest)
 
-## Technical Details
+Requirements:
 
-- Language: Kotlin
-- UI: Jetpack Compose and Material 3
-- Architecture: MVVM with StateFlow and Hilt dependency injection
-- Persistence: Room
-- Serialization: Gson
-- Minimum SDK: 26
-- Compile SDK: 36
-- Target SDK: 36
-- Java/Kotlin target: 17
-- Package name: `com.gift.werkstatt`
-- Main activity: `com.gift.werkstatt.MainActivity`
+- Android 8.0 (API 26) or newer
+- ~50 MB free space
 
-The manifest declares a launcher `MainActivity` and a `FileProvider` for sharing exported canvas images. There are no dangerous runtime permissions declared in the current manifest.
+Install:
 
-## Project Structure
+```bash
+adb install werkstatt-infinite.apk
+```
+
+Or transfer the APK to your device and open it.
+
+## Keyboard shortcuts (Bluetooth keyboard)
+
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl + Z` | Undo |
+| `Ctrl + Shift + Z` | Redo |
+| `Ctrl + G` | Cycle grid mode |
+| `Ctrl + E` | Toggle eraser |
+| `Ctrl + S` | Save now |
+| `Back` | Return to gallery |
+
+## Architecture
 
 ```text
 app/src/main/java/com/gift/werkstatt/
-  MainActivity.kt
-  WerkstattApplication.kt
+  MainActivity.kt              Single Activity entry point
+  WerkstattApplication.kt      Hilt application
   core/
-    design/
-    navigation/
+    design/                    Theme, colors (dark void + Volt #C8FF00), typography
+    navigation/                Type-safe NavHost + routes
   data/
-    files/
-    local/
-    repository/
-    serialization/
-  di/
+    files/                     Canvas export store, thumbnail store
+    local/                     Room entities, DAOs, database + migrations
+    repository/                Repository implementation
+    serialization/             Gson JSON codec for stroke data
+  di/                          Hilt module — Room, Gson, DAOs
   domain/
     canvas/
+      model/                   CanvasEntry, Stroke, BrushType, BrushPresets, GridMode, palettes
+      repository/              Repository interface
+      usecase/                 BuildStroke, EraseStrokes, GetCanvas, SaveCanvas, DeleteCanvas
   feature/
-    editor/
-    gallery/
-    templates/
+    editor/                    Canvas screen, ViewModel, DrawingCanvas, gesture handler
+    gallery/                   Gallery grid, sort, rename, delete dialogs
+    templates/                 Paper template picker
   rendering/
-    brush/
-    export/
-    spatial/
-    thumbnail/
-    transform/
+    brush/                     StrokeRenderer — 8 brush types, native + Compose paths
+    export/                    Canvas-to-bitmap export renderer
+    spatial/                   StrokeSpatialIndex — fast hit-testing for eraser
+    thumbnail/                 Thumbnail renderer
+    transform/                 Pinch-zoom/pan coordinate mapper
 ```
 
-Important areas:
+Tech stack:
 
-- `feature/editor/CanvasEditorScreen.kt` owns the canvas screen layout, export/share flow, and bottom controls.
-- `feature/editor/components/DrawingCanvas.kt` handles drawing input, pinch zoom, pan, grid rendering, and canvas drawing.
-- `feature/editor/CanvasEditorViewModel.kt` owns editor state, strokes, autosave, eraser logic, undo/redo, zoom state, and brush settings.
-- `rendering/brush/StrokeRenderer.kt` renders the different brush styles.
-- `data/files/ThumbnailStore.kt` generates lightweight gallery thumbnails.
-- `feature/gallery/` owns the gallery grid, sorting, rename, delete, and create-template flow.
+- Kotlin
+- Jetpack Compose + Material 3
+- MVVM with StateFlow (UDF)
+- Hilt dependency injection
+- Room (SQLite)
+- Gson serialization
+- Gradle Kotlin DSL + AGP 8.9.1
+- Min SDK 26 · Target SDK 36
 
-## Build
+## Build from source
 
-Build a debug APK:
+```bash
+git clone https://github.com/nodaysidle/werkstatt-infinite.git
+cd werkstatt-infinite
+```
+
+Create `local.properties`:
+
+```properties
+sdk.dir=/Users/youruser/Library/Android/sdk
+```
+
+Build debug APK:
 
 ```bash
 ./gradlew assembleDebug
 ```
 
-Build a release APK:
-
-```bash
-./gradlew assembleRelease
-```
-
-The release APK is written to:
-
-```text
-app/build/outputs/apk/release/app-release.apk
-```
-
-Note: the current release configuration is suitable for local device testing and uses the debug signing config. Use a real release keystore before distributing outside local testing.
-
-## Test And Lint
-
-Run unit tests:
+Run tests:
 
 ```bash
 ./gradlew test
 ```
 
-Run Android lint:
+Run lint:
 
 ```bash
 ./gradlew lintDebug
 ```
 
-Install the release APK on a connected Android device:
+Install on device:
 
 ```bash
-adb install -r app/build/outputs/apk/release/app-release.apk
+adb install app/build/outputs/apk/debug/app-debug.apk
 ```
 
-Launch it with ADB:
+## Release verification
 
 ```bash
-adb shell am start -n com.gift.werkstatt/.MainActivity
+./gradlew test                        # Unit tests
+./gradlew lintDebug                   # Static analysis
+./gradlew assembleDebug               # Debug APK
+apksigner verify --verbose app-debug.apk   # Signature check
+apkanalyzer apk summary app-debug.apk       # Package check
 ```
 
-## Notes For Contributors
+## Privacy
 
-- Keep the drawing surface uncluttered.
-- Preserve phone-first ergonomics and large touch targets.
-- Keep UI strings in Android resources.
-- Avoid adding image import back into the active flow unless the product scope changes.
-- Do not replace the Android/Kotlin/Compose stack.
+Werkstatt Infinite is local-first:
+
+- No account system
+- No telemetry
+- No network calls
+- All canvas data stays on-device in Room/SQLite
+- No dangerous runtime permissions
+
+## License
+
+MIT
+
+---
+
+<p align="center">
+  Built by <a href="https://github.com/nodaysidle">NODAYSIDLE</a>
+</p>
