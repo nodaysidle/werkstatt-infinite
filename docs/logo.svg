@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1915" />
+      <stop offset="100%" stop-color="#0A0807" />
+    </linearGradient>
+
+    <!-- Border Glow Gradient -->
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E18B58" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#B8AA95" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#7AB5FF" stop-opacity="0.8" />
+    </linearGradient>
+
+    <!-- Radial Soft Glow behind Nib -->
+    <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E18B58" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#E18B58" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Left & Right Infinity Loop Gradients -->
+    <linearGradient id="leftLoopGrad" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#E18B58" />
+      <stop offset="100%" stop-color="#C27D86" />
+    </linearGradient>
+
+    <linearGradient id="rightLoopGrad" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#C27D86" />
+      <stop offset="100%" stop-color="#7AB5FF" />
+    </linearGradient>
+
+    <!-- Metallic Pen Nib Gradient -->
+    <linearGradient id="nibGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2D2722" />
+      <stop offset="35%" stop-color="#4E433B" />
+      <stop offset="50%" stop-color="#5E534B" />
+      <stop offset="65%" stop-color="#4E433B" />
+      <stop offset="100%" stop-color="#2D2722" />
+    </linearGradient>
+
+    <!-- Inlay Accent Gold/Terracotta Gradient -->
+    <linearGradient id="inlayGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F2A474" />
+      <stop offset="100%" stop-color="#B55D2A" />
+    </linearGradient>
+
+    <!-- Drop Shadow Filter for 3D depth -->
+    <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Base Squircle App Icon Background -->
+  <rect x="24" y="24" width="464" height="464" rx="112" fill="url(#bgGrad)" stroke="url(#borderGrad)" stroke-width="4" filter="url(#dropShadow)" />
+
+  <!-- Soft Ambient Center Glow -->
+  <circle cx="256" cy="270" r="180" fill="url(#glowGrad)" />
+
+  <!-- 3D Layer 1: Left Infinity Loop (Passes Behind Pen Nib) -->
+  <path d="M 256 340 C 200 280 110 280 110 340 C 110 400 200 400 256 340" 
+        fill="none" 
+        stroke="url(#leftLoopGrad)" 
+        stroke-width="26" 
+        stroke-linecap="round"
+        filter="url(#softGlow)" />
+
+  <!-- 3D Layer 2: Pen Nib (Middle Layer) -->
+  <g filter="url(#dropShadow)">
+    <!-- Main Nib Body -->
+    <path d="M 256 340 L 196 230 L 196 140 C 196 120 216 100 256 100 C 296 100 316 120 316 140 L 316 230 Z" 
+          fill="url(#nibGrad)" 
+          stroke="#1F2421" 
+          stroke-width="2" />
+
+    <!-- Inlay Accent (Terracotta/Gold Core) -->
+    <path d="M 256 295 L 216 220 L 216 150 C 216 140 226 130 256 130 C 286 130 296 140 296 150 L 296 220 Z" 
+          fill="url(#inlayGrad)" />
+
+    <!-- Nib Left Side Highlight -->
+    <path d="M 198 140 L 198 228 L 208 215 L 208 140 Z" 
+          fill="#FFFFFF" 
+          opacity="0.08" />
+
+    <!-- Breather Hole -->
+    <circle cx="256" cy="200" r="10" fill="#1E1915" stroke="#1F2421" stroke-width="1.5" />
+
+    <!-- Slit Line -->
+    <line x1="256" y1="210" x2="256" y2="340" stroke="#12100D" stroke-width="3" stroke-linecap="round" />
+  </g>
+
+  <!-- 3D Layer 3: Right Infinity Loop (Passes In Front of Pen Nib) -->
+  <path d="M 256 340 C 312 280 402 280 402 340 C 402 400 312 400 256 340" 
+        fill="none" 
+        stroke="url(#rightLoopGrad)" 
+        stroke-width="26" 
+        stroke-linecap="round"
+        filter="url(#softGlow)" />
+
+  <!-- Intersection/Overlap Highlight Dot (Sits precisely at the center cross point) -->
+  <circle cx="256" cy="340" r="13" fill="#C27D86" />
+</svg>

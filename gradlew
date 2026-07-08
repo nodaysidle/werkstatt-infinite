@@ -24,17 +24,17 @@ cd "`dirname \"$PRG\"`/" >/dev/null
 APP_HOME="`pwd -P`"
 cd "$SAVED" >/dev/null
 
-GRADLE_DIST_URL="https://services.gradle.org/distributions/gradle-8.2-bin.zip"
-GRADLE_HOME="$HOME/.gradle/wrapper/dists/gradle-8.2-bin"
+GRADLE_DIST_URL="https://services.gradle.org/distributions/gradle-8.11.1-bin.zip"
+GRADLE_HOME="$HOME/.gradle/wrapper/dists/gradle-8.11.1-bin"
 
 # Download and extract gradle if needed
-if [ ! -d "$GRADLE_HOME/gradle-8.2" ]; then
-    echo "Downloading Gradle 8.2..."
+if [ ! -d "$GRADLE_HOME/gradle-8.11.1" ]; then
+    echo "Downloading Gradle 8.11.1..."
     mkdir -p "$GRADLE_HOME"
-    curl -L -o "$GRADLE_HOME/gradle-8.2-bin.zip" "$GRADLE_DIST_URL"
+    curl -L -o "$GRADLE_HOME/gradle-8.11.1-bin.zip" "$GRADLE_DIST_URL"
     cd "$GRADLE_HOME"
-    unzip -q gradle-8.2-bin.zip
-    rm gradle-8.2-bin.zip
+    unzip -q gradle-8.11.1-bin.zip
+    rm gradle-8.11.1-bin.zip
     cd "$SAVED"
 fi
 
@@ -46,4 +46,4 @@ else
 fi
 
 # Run gradle
-exec "$GRADLE_HOME/gradle-8.2/bin/gradle" "$@"
+exec "$GRADLE_HOME/gradle-8.11.1/bin/gradle" "$@"

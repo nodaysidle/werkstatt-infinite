@@ -18,3 +18,8 @@ Thumbs.db
 
 # Kotlin
 *.class
+.ant-colony/
+
+# Secrets
+*.jks
+*.keystore

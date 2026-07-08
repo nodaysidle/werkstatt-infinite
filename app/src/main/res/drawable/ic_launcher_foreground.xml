@@ -1,36 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <!-- Grid pattern representing infinite canvas -->
-    <group android:translateX="24" android:translateY="24">
-        <!-- Vertical lines -->
-        <path
-            android:fillColor="#FFFFFF"
-            android:pathData="M15,0 L17,0 L17,60 L15,60 Z"/>
-        <path
-            android:fillColor="#FFFFFF"
-            android:pathData="M29,0 L31,0 L31,60 L29,60 Z"/>
-        <path
-            android:fillColor="#FFFFFF"
-            android:pathData="M43,0 L45,0 L45,60 L43,60 Z"/>
-        <!-- Horizontal lines -->
-        <path
-            android:fillColor="#FFFFFF"
-            android:pathData="M0,15 L60,15 L60,17 L0,17 Z"/>
-        <path
-            android:fillColor="#FFFFFF"
-            android:pathData="M0,29 L60,29 L60,31 L0,31 Z"/>
-        <path
-            android:fillColor="#FFFFFF"
-            android:pathData="M0,43 L60,43 L60,45 L0,45 Z"/>
-        <!-- Pen stroke -->
-        <path
-            android:fillColor="#FFFFFF"
-            android:pathData="M5,55 Q20,20 55,5"
-            android:strokeWidth="4"
-            android:strokeColor="#FFFFFF"/>
-    </group>
+
+    <!-- Left Infinity Loop (Behind Pen Nib) -->
+    <path
+        android:strokeWidth="6"
+        android:strokeLineCap="round"
+        android:pathData="M 54,68 C 42,54 22,54 22,68 C 22,82 42,82 54,68">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:startX="22"
+                android:startY="68"
+                android:endX="54"
+                android:endY="68"
+                android:type="linear">
+                <item android:offset="0.0" android:color="#E18B58"/>
+                <item android:offset="1.0" android:color="#C27D86"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Pen Nib (Middle Layer) -->
+    <!-- Main Nib Body -->
+    <path
+        android:fillColor="#3D352F"
+        android:strokeColor="#1F2421"
+        android:strokeWidth="0.5"
+        android:pathData="M 54,68 L 42,46 L 42,28 C 42,24 46,20 54,20 C 62,20 66,24 66,28 L 66,46 Z" />
+
+    <!-- Inlay Accent (Terracotta/Gold Core) -->
+    <path
+        android:fillColor="#E18B58"
+        android:pathData="M 54,59 L 46,44 L 46,30 C 46,28 48,26 54,26 C 60,26 62,28 62,30 L 62,44 Z" />
+
+    <!-- Breather Hole -->
+    <path
+        android:fillColor="#12100D"
+        android:pathData="M 54,40 A 2,2 0 1,1 54,36 A 2,2 0 1,1 54,40 Z" />
+
+    <!-- Slit Line -->
+    <path
+        android:strokeColor="#12100D"
+        android:strokeWidth="0.8"
+        android:strokeLineCap="round"
+        android:pathData="M 54,40 L 54,68" />
+
+    <!-- Right Infinity Loop (In Front of Pen Nib) -->
+    <path
+        android:strokeWidth="6"
+        android:strokeLineCap="round"
+        android:pathData="M 54,68 C 66,54 86,54 86,68 C 86,82 66,82 54,68">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:startX="54"
+                android:startY="68"
+                android:endX="86"
+                android:endY="68"
+                android:type="linear">
+                <item android:offset="0.0" android:color="#C27D86"/>
+                <item android:offset="1.0" android:color="#7AB5FF"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Center Overlap Dot -->
+    <path
+        android:fillColor="#C27D86"
+        android:pathData="M 54,71 A 3,3 0 1,1 54,65 A 3,3 0 1,1 54,71 Z" />
 </vector>
