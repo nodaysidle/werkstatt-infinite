@@ -18,15 +18,15 @@ import androidx.compose.ui.unit.sp
 
 val Volt = Color(0xFFC8FF00)
 
-private val Ink = Color(0xFFF4F7F0)
-private val DeepBackground = Color(0xFF080A0D)
-private val DeepSurface = Color(0xFF12161B)
-private val RaisedSurface = Color(0xFF1B2027)
-private val Muted = Color(0xFF828A96)
+private val Ink = Color(0xFFF0F0F5)
+private val DeepBackground = Color(0xFF0A0A0F)
+private val DeepSurface = Color(0xFF14141F)
+private val RaisedSurface = Color(0xFF1A1A28)
+private val Muted = Color(0xFF6B6B80)
 private val BlueAccent = Color(0xFF58C7F3)
 private val Error = Color(0xFFFF7E7E)
-private val CanvasPaper = Color(0xFF101319)
-private val CanvasPaperRaised = Color(0xFF171B22)
+private val CanvasPaper = Color(0xFF0E0E16)
+private val CanvasPaperRaised = Color(0xFF181828)
 
 @Immutable
 data class WerkstattColors(

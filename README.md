@@ -1,3 +1,5 @@
+<img src=".github/social-preview.png" alt="Werkstatt Infinite — NODAYSIDLE" width="100%">
+
 # Werkstatt Infinite
 
 > Premium Android drawing and notebook app. Local-first. Jetpack Compose.
