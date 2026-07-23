@@ -1,48 +1,48 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
   <defs>
-    <!-- Background Gradient -->
+    <!-- Background Gradient — flat dark -->
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1E1915" />
-      <stop offset="100%" stop-color="#0A0807" />
+      <stop offset="0%" stop-color="#14141F" />
+      <stop offset="100%" stop-color="#0A0A0F" />
     </linearGradient>
 
-    <!-- Border Glow Gradient -->
+    <!-- Border — Volt -->
     <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#E18B58" stop-opacity="0.8" />
-      <stop offset="50%" stop-color="#B8AA95" stop-opacity="0.3" />
-      <stop offset="100%" stop-color="#7AB5FF" stop-opacity="0.8" />
+      <stop offset="0%" stop-color="#C8FF00" stop-opacity="0.6" />
+      <stop offset="50%" stop-color="#C8FF00" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#C8FF00" stop-opacity="0.6" />
     </linearGradient>
 
-    <!-- Radial Soft Glow behind Nib -->
+    <!-- Radial Soft Glow behind Nib — Volt -->
     <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#E18B58" stop-opacity="0.15" />
-      <stop offset="100%" stop-color="#E18B58" stop-opacity="0" />
+      <stop offset="0%" stop-color="#C8FF00" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#C8FF00" stop-opacity="0" />
     </radialGradient>
 
-    <!-- Left & Right Infinity Loop Gradients -->
+    <!-- Left & Right Infinity Loop Gradients — Volt monotonic -->
     <linearGradient id="leftLoopGrad" x1="0%" y1="50%" x2="100%" y2="50%">
-      <stop offset="0%" stop-color="#E18B58" />
-      <stop offset="100%" stop-color="#C27D86" />
+      <stop offset="0%" stop-color="#C8FF00" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#C8FF00" stop-opacity="0.5" />
     </linearGradient>
 
     <linearGradient id="rightLoopGrad" x1="0%" y1="50%" x2="100%" y2="50%">
-      <stop offset="0%" stop-color="#C27D86" />
-      <stop offset="100%" stop-color="#7AB5FF" />
+      <stop offset="0%" stop-color="#C8FF00" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#C8FF00" stop-opacity="0.9" />
     </linearGradient>
 
-    <!-- Metallic Pen Nib Gradient -->
+    <!-- Metallic Pen Nib Gradient — cool dark grays -->
     <linearGradient id="nibGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#2D2722" />
-      <stop offset="35%" stop-color="#4E433B" />
-      <stop offset="50%" stop-color="#5E534B" />
-      <stop offset="65%" stop-color="#4E433B" />
-      <stop offset="100%" stop-color="#2D2722" />
+      <stop offset="0%" stop-color="#1A1A25" />
+      <stop offset="35%" stop-color="#2A2A3C" />
+      <stop offset="50%" stop-color="#35354A" />
+      <stop offset="65%" stop-color="#2A2A3C" />
+      <stop offset="100%" stop-color="#1A1A25" />
     </linearGradient>
 
-    <!-- Inlay Accent Gold/Terracotta Gradient -->
+    <!-- Inlay Accent — Volt -->
     <linearGradient id="inlayGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#F2A474" />
-      <stop offset="100%" stop-color="#B55D2A" />
+      <stop offset="0%" stop-color="#C8FF00" />
+      <stop offset="100%" stop-color="#7A9944" />
     </linearGradient>
 
     <!-- Drop Shadow Filter for 3D depth -->
@@ -78,7 +78,7 @@
           stroke="#1F2421" 
           stroke-width="2" />
 
-    <!-- Inlay Accent (Terracotta/Gold Core) -->
+    <!-- Inlay Accent (Volt Core) -->
     <path d="M 256 295 L 216 220 L 216 150 C 216 140 226 130 256 130 C 286 130 296 140 296 150 L 296 220 Z" 
           fill="url(#inlayGrad)" />
 
@@ -88,10 +88,10 @@
           opacity="0.08" />
 
     <!-- Breather Hole -->
-    <circle cx="256" cy="200" r="10" fill="#1E1915" stroke="#1F2421" stroke-width="1.5" />
+    <circle cx="256" cy="200" r="10" fill="#0A0A0F" stroke="#1F2421" stroke-width="1.5" />
 
     <!-- Slit Line -->
-    <line x1="256" y1="210" x2="256" y2="340" stroke="#12100D" stroke-width="3" stroke-linecap="round" />
+    <line x1="256" y1="210" x2="256" y2="340" stroke="#0A0A0F" stroke-width="3" stroke-linecap="round" />
   </g>
 
   <!-- 3D Layer 3: Right Infinity Loop (Passes In Front of Pen Nib) -->
@@ -102,6 +102,6 @@
         stroke-linecap="round"
         filter="url(#softGlow)" />
 
-  <!-- Intersection/Overlap Highlight Dot (Sits precisely at the center cross point) -->
-  <circle cx="256" cy="340" r="13" fill="#C27D86" />
+  <!-- Intersection/Overlap Highlight Dot -->
+  <circle cx="256" cy="340" r="13" fill="#C8FF00" />
 </svg>
